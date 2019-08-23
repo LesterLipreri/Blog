@@ -22,7 +22,10 @@
                                 @foreach ($posts as $post)
                                     <tr>
                                         <td>{{$post->id}}</td>
-                                        <td>{{$post->nombre}}</td>
+                                        <td>{{$post->titulo}}</td>
+                                        <td>
+                                        <img src="{{$post->foto}}" alt="">
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>

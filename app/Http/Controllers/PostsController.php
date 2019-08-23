@@ -38,7 +38,24 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-        return $request;
+        $foto = "noimg.jpg";
+
+        if ($request->hasFile('foto')) {
+            $foto = $request->file('foto');
+            $name = time().$foto->getClientOriginalName();
+            $foto->move(public_path().'/img/',$name);
+        }
+
+        $post = new Post();
+        $post->titulo = $request->titulo;
+        $post->descripcion = $request->descripcion;
+        $post->contenido = $request->contenido;
+        $post->foto = '/img/'.$name;
+
+        $post->user_id = 1;
+        $post->save();
+        $post->categorias()->attach($request->categorias);
+        return redirect()->route('posts.index');
     }
 
     /**
