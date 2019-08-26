@@ -57,5 +57,6 @@
 
 
         </div>
+    <a href="{{route('posts.index')}}" class="btn btn-secondary">Ir a Posts</a>
     </div>
 @endsection

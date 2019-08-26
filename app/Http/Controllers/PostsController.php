@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Post;
 use App\Categoria;
+use App\Http\Requests\StorePost;
 use Illuminate\Http\Request;
 
 class PostsController extends Controller
@@ -36,10 +37,11 @@ class PostsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StorePost $request)
     {
-        $foto = "noimg.jpg";
+            $validated = $request->validated();
 
+        $foto = "noimg.jpg";
         if ($request->hasFile('foto')) {
             $foto = $request->file('foto');
             $name = time().$foto->getClientOriginalName();
