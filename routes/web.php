@@ -17,6 +17,10 @@ Route::get('categorias',function(){
 
 Route::get('categorias', 'CategoriasController@index')->name('categorias');
 
-Route::post('categorias','CategoriasController@store')->name('categorias.store');
+Route::post('categorias', 'CategoriasController@store')->name('categorias.store');
 
-route::resource('posts','PostsController');
+route::resource('posts', 'PostsController');
+
+route::get('post', 'BlogController@show')->name('blog.post');
+
+route::resource('blogs', 'BlogController');
