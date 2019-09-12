@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.dashboard')
 
 @section('content')
     <div class="container">
@@ -38,46 +38,63 @@
 
         </div>
         <div class="row">
+            <div class="col-md-8">
+
+                <form action="{{route('posts.store')}}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="form-group">
+                        <label for="">Titulo</label>
+                    <input type="text" class="form-control @error('titulo') is-invalid @enderror" name="titulo" value="{{old('titulo')}}">
+                            @error('titulo')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="">Descripcion</label>
+                        <input type="text" class="form-control @error('descripcion') is-invalid @enderror" name="descripcion" value="{{old('descripcion')}}">
+                                @error('descripcion')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="">Contenido</label>
+                        <textarea type="text" class="form-control  @error('contenido') is-invalid @enderror" name="contenido" value="{{old('contenido')}}">
+                                @error('descripcion')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                        </textarea>
+                        <div class="form-group">
+                            <label for="">Foto</label>
+                            <input type="file" class="form-control @error('foto') is-invalid @enderror" name="foto" value="{{old('foto')}}">
+                                @error('descripcion')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="">Categorias</label>
+                            <select name="categorias[]" id="" class="form-control" multiple>
+                                @foreach ($categorias as $categoria)
+                            <option value="{{$categoria->id}}">{{$categoria->nombre}}</option>
+
+                                @endforeach
+
+
+                            </select>
+
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+            </form>
+
+            </div>
+        </div>
+        <div class="row">
             <div class="modal fade" id="post" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-body">
                             <h2>A new  post</h2>
-                        <form action="{{route('posts.store')}}" method="POST" enctype="multipart/form-data">
-                                @csrf
-                                <div class="form-group">
-                                    <label for="">Titulo</label>
-                                    <input type="text" class="form-control" name="titulo">
 
-                                </div>
-                                <div class="form-group">
-                                    <label for="">Descripcion</label>
-                                    <input type="text" class="form-control" name="descripcion">
-
-                                </div>
-                                <div class="form-group">
-                                    <label for="">Contenido</label>
-                                    <textarea type="text" class="form-control" name="contenido">
-                                    </textarea>
-                                    <div class="form-group">
-                                        <label for="">Foto</label>
-                                        <input type="file" class="form-control" name="foto">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="">Categorias</label>
-                                        <select name="categorias[]" id="" class="form-control" multiple>
-                                            @foreach ($categorias as $categoria)
-                                        <option value="{{$categoria->id}}">{{$categoria->nombre}}</option>
-
-                                            @endforeach
-
-
-                                        </select>
-
-                                    </div>
-                                </div>
-                                <button type="submit" class="btn btn-primary">Guardar</button>
-                        </form>
                         </div>
                     </div>
 
